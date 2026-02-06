@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# RestaurIAnte - AI Restaurant Recommender
 
-## Getting Started
+**RestaurIAnte** es una aplicación web moderna que utiliza Inteligencia Artificial para ofrecer recomendaciones gastronómicas personalizadas basadas en la localización, el tipo de cocina y el presupuesto del usuario.
 
-First, run the development server:
+Este proyecto ha sido desarrollado como parte de mi portfolio de **DAW (Desarrollo de Aplicaciones Web)**, enfocándome en la integración de modelos de lenguaje (LLMs) y diseño de interfaz avanzada.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
+<img width="1043" height="679" alt="image" src="https://github.com/user-attachments/assets/80dba15e-4145-4862-8b47-3529606726a0" />
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<img width="806" height="852" alt="image" src="https://github.com/user-attachments/assets/59e92959-f752-4569-8566-53423f77311e" />
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Características
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **IA Generativa**: Integración con el modelo `Gemini-3-Flash` de Google para generar sugerencias reales.
+- **Diseño Glassmorphism**: Interfaz elegante con transparencias y efectos de desenfoque (blur) mediante Tailwind CSS.
+- **Arquitectura Serverless**: Uso de *Route Handlers* de Next.js para un backend seguro y escalable.
+- **Geolocalización Dinámica**: Generación automática de enlaces a Google Maps para cada recomendación.
+- **Responsive Design**: Totalmente adaptado a dispositivos móviles y escritorio.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Stack Tecnológico
 
-## Deploy on Vercel
+- **Frontend**: [React.js](https://reactjs.org/) & [Next.js 15+](https://nextjs.org/) (App Router).
+- **Estilos**: [Tailwind CSS](https://tailwindcss.com/).
+- **IA**: [Google Generative AI SDK](https://ai.google.dev/).
+- **Despliegue**: [Vercel](https://vercel.com/).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
