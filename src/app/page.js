@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { UI_TEXTS } from "./constants";
 import FormInput from "./components/FormInput";
+import RestaurantCard from "./components/RestaurantCard";
 
 export default function Home() {
   const t = UI_TEXTS.es;
@@ -17,6 +18,7 @@ export default function Home() {
     setFormData({ ...formData, [name]: value });
   };
   const [loading, setLoading] = useState(false);
+  const [results, setResult] = useState([]);
 
   const handleSearch = async () => {
 
@@ -33,23 +35,32 @@ export default function Home() {
       });
 
       const data = await response.json();
-      console.log("Respuesta del servidor", data.message);
-      alert(data.message);
+
+      console.log("Datos recibidos:", data);
+
+      if (data.restaurants) {
+        setResult(data.restaurants);
+      } else {
+        alert("No se encontraron restaurantes.");
+      }
+
+
     } catch (error) {
       console.error("Error al buscar:", error);
+      alert("Hubo un error en la conexión.");
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <main className="min-h-screen bg-[url('/restaurante.jpg')] bg-cover bg-center flex items-center justify-center p-6 font-sans">
+    <main className="min-h-screen bg-[url('/restaurante.jpg')] bg-cover bg-center flex items-center justify-center p-6 font-sans flex-col overflow-y-auto">
 
       {/* Capa de superposición para que el fondo no moleste a la lectura */}
-      <div className="absolute inset-0 bg-white/20 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-white/20 backdrop-blur-sm fixed" />
 
       {/* Tarjeta del formulario (Glassmorphism) */}
-      <div className="relative bg-white/90 backdrop-blur-md p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] max-w-xl w-full border border-white">
+      <div className="relative  bg-white/90 backdrop-blur-md p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] max-w-xl w-full border border-white">
 
         {/* Encabezado */}
         <h1 className="text-gray-900 text-3xl tracking-tight text-center mb-2">
@@ -111,6 +122,17 @@ export default function Home() {
           </button>
         </div>
       </div>
+      {/* SECCIÓN DE RESULTADOS */}
+      {results.length > 0 && (
+        <div className="relative z-10 mt-12 w-full max-w-5xl">
+          <h2 className="text-white text-2xl font-bold mb-6 text-center drop-shadow-md">Nuestras recomendaciones:</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {results.map((res, index) => (
+              <RestaurantCard key={index} restaurant={res} />
+            ))}
+          </div>
+        </div>
+      )}
     </main>
   );
 }

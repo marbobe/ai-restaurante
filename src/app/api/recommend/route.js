@@ -1,29 +1,56 @@
 import { NextResponse } from "next/server";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 export async function POST(request) {
 
     try {
-        const data = await request.json();
-
-        const { location, cuisine, budget } = data;
+        const { location, cuisine, budget } = await request.json();
 
         if (!location || location.trim() === "") {
             return NextResponse.json(
                 { error: "Faltan campos necesarios" },
                 { status: 400 }
             );
-        }
-
-        const cuisineText = cuisine && cuisine.trim() !== ""
-            ? `especializados en ${cuisine}`
-            : "de cualquier tipo (los mejor valorados)";
-
-        const mockResponse = {
-            message: `Hola! Pronto te recomendaré sitios de ${cuisineText} en ${location} con presupuesto ${budget}.`
         };
 
-        return NextResponse.json(mockResponse);
+        const model = genAI.getGenerativeModel({
+            model: "gemini-3-flash-preview",
+            generationConfig: { responseMimeType: "application/json" }
+        });
+
+        const prompt = `
+            Actúa como un experto crítico gastronómico. 
+            Busca 6 restaurantes REALES que existan en Google Maps en la zona de ${location}.
+            Tipo de cocina: ${cuisine || "cualquiera, pero los mejor valorados"}.
+            Presupuesto aproximado: ${budget}.
+            
+            REGLAS ESTRICTAS:
+            1. Si la localización "${location}" no existe o no encuentras restaurantes reales allí, devuelve el objeto JSON con el array "restaurants" vacío: {"restaurants": []}.
+            2. No te inventes nombres. Si no estás 100% seguro de que el lugar existe, no lo incluyas.
+            3. La descripción debe mencionar algo específico del lugar.
+
+            FORMATO JSON DE SALIDA:
+            {
+                "restaurants": [
+                {
+                    "name": "Nombre",
+                    "description": "Descripción",
+                    "rating": 5,
+                    "address": "Dirección"
+                }
+                ]
+            }
+        `;
+
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+
+        return NextResponse.json(JSON.parse(text));
+
     } catch (error) {
-        return NextResponse.json({ error: "Error en el servidor" }, { status: 500 });
+        console.error("Error en la IA:", error);
+        return NextResponse.json({ error: "Error pude obtener recomendaciones" }, { status: 500 });
     }
 }
