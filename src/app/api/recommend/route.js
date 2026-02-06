@@ -16,13 +16,13 @@ export async function POST(request) {
         };
 
         const model = genAI.getGenerativeModel({
-            model: "gemini-3-flash-preview",
+            model: "gemini-2.5-flash",
             generationConfig: { responseMimeType: "application/json" }
         });
 
         const prompt = `
             Actúa como un experto crítico gastronómico. 
-            Busca 6 restaurantes REALES que existan en Google Maps en la zona de ${location}.
+            Busca hasta 6 restaurantes REALES que existan en Google Maps en la zona de ${location}.
             Tipo de cocina: ${cuisine || "cualquiera, pero los mejor valorados"}.
             Presupuesto aproximado: ${budget}.
             
@@ -40,7 +40,8 @@ export async function POST(request) {
                     "rating": 5,
                     "address": "Dirección"
                 }
-                ]
+                ],
+                "reason": "Opciones: 'LOCATION_NOT_FOUND', 'CUISINE_NOT_FOUND' o 'SUCCESS'"
             }
         `;
 

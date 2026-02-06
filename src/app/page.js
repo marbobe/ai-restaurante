@@ -19,14 +19,18 @@ export default function Home() {
   };
   const [loading, setLoading] = useState(false);
   const [results, setResult] = useState([]);
+  const [error, setError] = useState(null);
 
   const handleSearch = async () => {
 
+    setError(null);
+
     if (!formData.location.trim()) {
-      alert("Por favor, introduce una localización."); // Luego podemos hacerlo más bonito con un mensaje en pantalla
+      setError("Por favor, introduce una localización.");
       return;
     }
     setLoading(true);
+    setResult([]);
     try {
       const response = await fetch("/api/recommend", {
         method: "POST",
@@ -36,20 +40,21 @@ export default function Home() {
 
       const data = await response.json();
 
-      console.log("Datos recibidos:", data);
-
-      if (data.restaurants) {
+      if (data.restaurants && data.restaurants.length > 0) {
         setResult(data.restaurants);
       } else {
-        alert("No se encontraron restaurantes.");
+        if (data.reason === "CUISINE_NOT_FOUND") {
+          setError(`No parece haber restaurantes de tipo "${formData.cuisine}" en esta zona. ¡Prueba con otro antojo!`);
+        } else if (data.reason === "LOCATION_NOT_FOUND") {
+          setError("No hemos reconocido esa ubicación. Prueba a ser más específico (ej. nombre de la ciudad).");
+        } else {
+          setError("No hemos encontrado resultados que coincidan. Prueba a cambiar los filtros.");
+        }
       }
-
-
-    } catch (error) {
-      console.error("Error al buscar:", error);
-      alert("Hubo un error en la conexión.");
+    } catch (err) {
+      setError("Vaya, algo ha salido mal con la conexión. Inténtalo de nuevo.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -57,7 +62,7 @@ export default function Home() {
     <main className="min-h-screen bg-[url('/restaurante.jpg')] bg-cover bg-center flex items-center justify-center p-6 font-sans flex-col overflow-y-auto">
 
       {/* Capa de superposición para que el fondo no moleste a la lectura */}
-      <div className="absolute inset-0 bg-white/20 backdrop-blur-xs fixed" />
+      <div className="absolute inset-0 bg-white/30 backdrop-blur-xs fixed" />
 
       {/* Tarjeta del formulario (Glassmorphism) */}
       <div className="relative  bg-white/90 backdrop-blur-md p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] max-w-xl w-full border border-white">
@@ -113,6 +118,13 @@ export default function Home() {
           </div>
 
           {/* Botón de envío */}
+          {error && (
+            <div className="bg-red-50 border-l-4 border-red-500 p-4 mt-4 rounded-r-xl transition-all">
+              <div className="flex items-center">
+                <span className="text-red-700 text-sm font-medium">{error}</span>
+              </div>
+            </div>
+          )}
           <button disabled={loading}
             onClick={handleSearch}
             className={`w-full py-4 rounded-full font-semibold transition-all shadow-lg mt-4 
@@ -125,7 +137,7 @@ export default function Home() {
       {/* SECCIÓN DE RESULTADOS */}
       {results.length > 0 && (
         <div className="relative z-10 mt-12 w-full max-w-5xl">
-          <h2 className="text-white text-2xl font-bold mb-6 text-center drop-shadow-md">Nuestras recomendaciones:</h2>
+          <h2 className="text-white text-2xl font-bold mb-6 text-center drop-shadow-md">{t.recomendations}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {results.map((res, index) => (
               <RestaurantCard key={index} restaurant={res} />

@@ -1,7 +1,7 @@
 export const UI_TEXTS = {
     es: {
         title1: "Buscador de   ",
-        title2: "ResturIAntes",
+        title2: "RestaurIAntes",
         subtitle: "Encuentra el lugar perfecto para comer usando inteligencia artificial.",
         labels: {
             location: "¿Dónde quieres comer?",
@@ -19,6 +19,7 @@ export const UI_TEXTS = {
         ],
         search_button: "Buscar Restaurantes",
         searching_button: "Buscando...",
-        maps_button: "Ver en google maps"
+        maps_button: "Ver en google maps",
+        recomendations: "Nuestras recomendaciones:"
     }
 };
