@@ -18,6 +18,7 @@ export const UI_TEXTS = {
             { id: "high", label: "Caro (€€€)" }
         ],
         search_button: "Buscar Restaurantes",
-        searching_button: "Buscando..."
+        searching_button: "Buscando...",
+        maps_button: "Ver en google maps"
     }
 };

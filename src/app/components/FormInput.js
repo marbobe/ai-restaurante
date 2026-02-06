@@ -10,8 +10,7 @@ export default function FormInput({ label, name, value, onChange, placeholder, t
                 value={value}
                 onChange={onChange}
                 placeholder={placeholder}
-                className="w-full bg-transparent text-gray-800 text-lg outline-none placeholder:text-gray-400/70 py-1  
-                   transition-all duration-500 hover:bg-white/70 hover:px-2 hover:rounded-lg"
+                className="w-full bg-transparent text-gray-800 text-lg outline-none placeholder:text-gray-400/70 py-1 transition-all duration-500 hover:bg-white/70 hover:px-2 hover:rounded-lg"
             />
         </div>
     );

@@ -57,7 +57,7 @@ export default function Home() {
     <main className="min-h-screen bg-[url('/restaurante.jpg')] bg-cover bg-center flex items-center justify-center p-6 font-sans flex-col overflow-y-auto">
 
       {/* Capa de superposición para que el fondo no moleste a la lectura */}
-      <div className="absolute inset-0 bg-white/20 backdrop-blur-sm fixed" />
+      <div className="absolute inset-0 bg-white/20 backdrop-blur-xs fixed" />
 
       {/* Tarjeta del formulario (Glassmorphism) */}
       <div className="relative  bg-white/90 backdrop-blur-md p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] max-w-xl w-full border border-white">
