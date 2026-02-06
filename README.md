@@ -7,7 +7,9 @@ Este proyecto ha sido desarrollado como parte de mi portfolio de **DAW (Desarrol
 ---
 <img width="1043" height="679" alt="image" src="https://github.com/user-attachments/assets/80dba15e-4145-4862-8b47-3529606726a0" />
 
-<img width="806" height="852" alt="image" src="https://github.com/user-attachments/assets/59e92959-f752-4569-8566-53423f77311e" />
+<img width="1209" height="498" alt="image" src="https://github.com/user-attachments/assets/899be470-558c-4108-87a1-6708c4309310" />
+
+<img width="1225" height="737" alt="image" src="https://github.com/user-attachments/assets/1319ee46-e227-44db-8789-af66511d7103" />
 
 
 
