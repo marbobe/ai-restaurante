@@ -32,16 +32,16 @@ Este proyecto ha sido desarrollado como parte de mi portfolio de **DAW (Desarrol
 ## Configuración Local
 Clona el repositorio:
 ```bash
-git clone [https://github.com/tu-usuario/ai-restaurante.git](https://github.com/tu-usuario/ai-restaurante.git)´´´
+git clone [https://github.com/tu-usuario/ai-restaurante.git](https://github.com/tu-usuario/ai-restaurante.git)
 
 Instala las dependencias:
 ```bash
-npm install´´´
+npm install
 
 Crea un archivo .env.local en la raíz y añade tu API Key de Google:
 ```bash
-GEMINI_API_KEY=tu_clave_aqui´´´
+GEMINI_API_KEY=tu_clave_aqui
 
 Lanza el servidor de desarrollo:
 ```bash
-npm run dev´´´
+npm run dev
