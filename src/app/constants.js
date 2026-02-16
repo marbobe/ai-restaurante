@@ -1,3 +1,11 @@
+/**
+ * UI Localization Strings
+ * * This object serves as the single source of truth for all user-facing text 
+ * within the application. It is structured to support future internationalization (i18n) 
+ * by adding additional language keys (e.g., 'es', 'en').
+ * * @type {Object}
+ * @property {Object} es - Spanish translation dictionary.
+ */
 export const UI_TEXTS = {
     es: {
         title1: "Buscador de   ",

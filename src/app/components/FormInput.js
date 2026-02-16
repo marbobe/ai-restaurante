@@ -1,3 +1,19 @@
+
+/**
+ * FormInput Component
+ * * A reusable, styled input field designed for the Foodie AI forms.
+ * It features a minimalist bottom-border design with smooth transitions 
+ * and hover effects to enhance the user experience.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.label - The descriptive text displayed above the input.
+ * @param {string} props.name - The name attribute, used to identify the field in state updates.
+ * @param {string|number} props.value - The current value of the input.
+ * @param {function} props.onChange - Callback function triggered on every keystroke.
+ * @param {string} [props.placeholder] - Optional hint text displayed when the input is empty.
+ * @param {string} [props.type="text"] - The HTML input type (e.g., "text", "email", "number").
+ * * @returns {JSX.Element} A styled input field wrapped in a labeled container.
+ */
 export default function FormInput({ label, name, value, onChange, placeholder, type = "text" }) {
     return (
         <div className="border-b border-gray-100 pb-2">
